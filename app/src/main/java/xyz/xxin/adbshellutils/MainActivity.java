@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    }
+    
 
     private String exec(String command) throws RemoteException {
         // 检查是否存在包含任意内容的双引号
