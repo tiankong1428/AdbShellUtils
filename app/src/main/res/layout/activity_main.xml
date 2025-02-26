@@ -6,23 +6,47 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	tools:context=".MainActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:hint="command execute result"
-            android:id="@+id/execute_result"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </ScrollView>
-    
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<TextView
+			android:hint="command execute result"
+			android:id="@+id/execute_result"
+			android:textColor="@color/black"
+			android:layout_margin="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+	</ScrollView>
+
 	<LinearLayout
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<EditText
+			android:id="@+id/input_command"
+			android:hint="input command"
+			android:layout_weight="1"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"/>
+
+		<Button
+			android:text="执行命令"
+			android:id="@+id/execute_command"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center">
 
@@ -30,12 +54,14 @@
 			android:text="禁用ipv6"
 			android:id="@+id/execute_command"
 			android:layout_width="wrap_content"
+            android:layout_weight="1.0"
 			android:layout_height="wrap_content"/>
 
 		<Button
 			android:text="启用ipv6"
 			android:id="@+id/execute_command2"
 			android:layout_width="wrap_content"
+            android:layout_weight="1.0"
 			android:layout_height="wrap_content"/>
 
 	</LinearLayout>
