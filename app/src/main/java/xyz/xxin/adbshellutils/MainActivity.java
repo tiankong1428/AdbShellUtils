@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private Button request_permission;
     private Button connect_shizuku;
     private Button execute_command;
+    private Button execute_command1;
     private Button execute_command2;
+    private EditText input_command;
     private TextView execute_result;
     private IUserService iUserService;
 
@@ -129,7 +131,38 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "请先连接Shizuku服务", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String a = "device_config put connectivity ipclient_accept_ra_min_lft 3601"
+
+            String command = input_command.getText().toString().trim();
+
+            // 命令不能为空
+            if (TextUtils.isEmpty(command)) {
+                Toast.makeText(this, "命令不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            try {
+                // 执行命令，返回执行结果
+                String result = exec(command);
+
+                if (result == null) {
+                    result = "返回结果为null";
+                } else if (TextUtils.isEmpty(result.trim())) {
+                    result = "返回结果为空";
+                }
+
+                // 将执行结果显示
+                execute_result.setText(result);
+            } catch (Exception e) {
+                execute_result.setText(e.toString());
+                e.printStackTrace();
+            }
+        });
+        execute_command1.setOnClickListener(view -> {
+            if (iUserService == null) {
+                Toast.makeText(this, "请先连接Shizuku服务", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String a = "device_config put connectivity ipclient_accept_ra_min_lft 3601";
             String command = a.trim();
 
             // 命令不能为空
@@ -160,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "请先连接Shizuku服务", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String a = "device_config put connectivity ipclient_accept_ra_min_lft 0"
+            String a = "device_config put connectivity ipclient_accept_ra_min_lft 0";
             String command = a.trim();
 
             // 命令不能为空
@@ -186,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
     }
 
     private String exec(String command) throws RemoteException {
@@ -286,6 +320,8 @@ public class MainActivity extends AppCompatActivity {
         connect_shizuku = findViewById(R.id.connect_shizuku);
         execute_command = findViewById(R.id.execute_command);
         execute_command2 = findViewById(R.id.execute_command2);
+        execute_command1 = findViewById(R.id.execute_command1);
+        input_command = findViewById(R.id.input_command);
         execute_result = findViewById(R.id.execute_result);
     }
 }
